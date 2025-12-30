@@ -1,6 +1,56 @@
 'use client'
 
+import { useState } from 'react'
+
 export default function Contact() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus(null)
+
+    const form = e.currentTarget
+    const formDataObj = new FormData(form)
+    const firstName = formDataObj.get('firstName') as string
+    const lastName = formDataObj.get('lastName') as string
+
+    // Create FormData with FormSubmit format
+    const submitData = new FormData()
+    submitData.append('_to', 'vinodjc007@gmail.com')
+    submitData.append('_template', 'table')
+    submitData.append('_captcha', 'false')
+    submitData.append('_subject', `🎨 New Portfolio Inquiry from ${firstName} ${lastName}`)
+    submitData.append('Name', `${firstName} ${lastName}`)
+    submitData.append('Email', formDataObj.get('email') as string)
+    submitData.append('Project Type', formDataObj.get('projectType') as string || 'Not specified')
+    submitData.append('Budget', formDataObj.get('budget') as string || 'Not specified')
+    submitData.append('Message', formDataObj.get('projectDetails') as string)
+
+    try {
+
+      const response = await fetch('https://formsubmit.co/ajax/vinodjc007@gmail.com', {
+        method: 'POST',
+        body: submitData,
+      })
+
+      const data = await response.json()
+      
+      if (response.ok && data.success) {
+        setSubmitStatus('success')
+        form.reset()
+      } else {
+        setSubmitStatus('error')
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <section id="contact-form" className="relative pt-0 pb-20 sm:pb-24 md:pb-28 lg:pb-32 overflow-hidden bg-white -mt-8">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
@@ -120,7 +170,11 @@ export default function Contact() {
 
           {/* Right Column - Contact Form */}
           <div className="bg-white/11 rounded-[18px] p-8 shadow-[0px_0px_2px_rgba(0,0,0,0.15)]">
-            <form className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4" action="https://formsubmit.co/vinodjc007@gmail.com" method="POST">
+              {/* Hidden FormSubmit configuration for table template */}
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
+              
               {/* First Name and Last Name Row */}
               <div className="grid grid-cols-2 gap-4">
                 {/* First Name */}
@@ -145,6 +199,7 @@ export default function Contact() {
                     type="text"
                     id="lastName"
                     name="lastName"
+                    required
                     className="w-full h-[50px] px-4 bg-white/85 rounded-[7px] shadow-[0px_0px_5.5px_rgba(0,0,0,0.25)] focus:ring-2 focus:ring-[#5776E5] focus:border-transparent outline-none transition-all border-0"
                   />
                 </div>
@@ -159,6 +214,7 @@ export default function Contact() {
                   type="email"
                   id="email"
                   name="email"
+                  required
                   className="w-full h-[50px] px-4 bg-white/85 rounded-[7px] shadow-[0px_0px_5.5px_rgba(0,0,0,0.25)] focus:ring-2 focus:ring-[#5776E5] focus:border-transparent outline-none transition-all border-0"
                 />
               </div>
@@ -197,6 +253,7 @@ export default function Contact() {
                 <textarea
                   id="projectDetails"
                   name="projectDetails"
+                  required
                   className="w-full h-[124px] px-4 py-3 bg-white/85 rounded-[7px] shadow-[0px_0px_5.5px_rgba(0,0,0,0.25)] focus:ring-2 focus:ring-[#5776E5] focus:border-transparent outline-none transition-all resize-none border-0"
                 ></textarea>
               </div>
@@ -204,15 +261,28 @@ export default function Contact() {
               {/* Send Message Button */}
               <button
                 type="submit"
-                className="w-full h-[56px] bg-[#5776E5]/85 text-white font-bold text-[20px] leading-[24px] rounded-[7px] hover:bg-[#5776E5] transition-all duration-300 flex items-center justify-center gap-2"
+                disabled={isSubmitting}
+                className="w-full h-[56px] bg-[#5776E5]/85 text-white font-bold text-[20px] leading-[24px] rounded-[7px] hover:bg-[#5776E5] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
                 <img
                   src="/icons/Vector (4).png"
                   alt="Send icon"
                   className="w-5 h-5 brightness-0 invert"
                 />
               </button>
+              
+              {/* Status Message */}
+              {submitStatus === 'success' && (
+                <p className="text-green-500 text-sm text-center mt-2">
+                  Message sent successfully! We'll get back to you soon.
+                </p>
+              )}
+              {submitStatus === 'error' && (
+                <p className="text-red-500 text-sm text-center mt-2">
+                  Failed to send message. Please try again.
+                </p>
+              )}
             </form>
           </div>
         </div>

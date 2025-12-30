@@ -31,16 +31,26 @@ export default function Footer() {
             
             {/* Social Icons */}
             <div className="flex items-center gap-4 mt-12">
-              <a href="#" className="w-[73px] h-[73px] flex items-center justify-center hover:opacity-80 transition-opacity">
+              <a 
+                href="https://www.instagram.com/iam_chinna_0202/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-[73px] h-[73px] flex items-center justify-center hover:opacity-80 transition-opacity"
+              >
                 <img
-                  src="/icons/Vector (5).png"
+                  src="/icons/Group 3.png"
                   alt="Instagram"
                   className="w-full h-full object-contain"
                 />
               </a>
-              <a href="#" className="w-[73px] h-[73px] flex items-center justify-center hover:opacity-80 transition-opacity">
+              <a 
+                href="https://www.linkedin.com/in/gopi-yallaturi-751b86352/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-[73px] h-[73px] flex items-center justify-center hover:opacity-80 transition-opacity"
+              >
                 <img
-                  src="/icons/Group 3.png"
+                  src="/icons/Vector (5).png"
                   alt="LinkedIn"
                   className="w-full h-full object-contain"
                 />

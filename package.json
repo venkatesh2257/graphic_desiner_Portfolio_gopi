@@ -9,10 +9,11 @@
     "export": "next build && next export"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "framer-motion": "^11.0.0",
     "next": "^14.2.0",
     "react": "^18.3.0",
-    "react-dom": "^18.3.0",
-    "framer-motion": "^11.0.0"
+    "react-dom": "^18.3.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
@@ -24,5 +25,3 @@
     "typescript": "^5.3.3"
   }
 }
-
-
