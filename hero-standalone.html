@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gopi - Graphic Designer Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'soft-blue': '#5B6CFF',
+            'dark-gray': '#2B2B2B',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-white antialiased">
+  <!-- Hero Section -->
+  <section class="relative bg-white pt-20 overflow-hidden">
+    <!-- Desktop Hero Container - Fixed dimensions, poster-style layout -->
+    <div class="hidden md:block relative max-w-[1400px] mx-auto h-[820px] bg-white">
+      
+      <!-- Layer 1: Background Text - "Hi, I am GOPI" -->
+      <!-- z-index: 10 (behind image) -->
+      <div class="absolute left-[120px] top-[180px] z-10 w-fit">
+        <h1 class="text-[130px] font-extrabold text-soft-blue leading-none whitespace-nowrap tracking-tight">
+          Hi, I am GOPI
+        </h1>
+      </div>
+
+      <!-- Layer 2: Character Image - Centered horizontally -->
+      <!-- z-index: 20 (middle layer, overlaps text) -->
+      <div class="absolute left-1/2 top-[120px] -translate-x-1/2 z-20 w-fit">
+        <img
+          src="/assets/hero_image.png"
+          alt="Gopi Character"
+          class="h-[540px] w-auto object-contain"
+        />
+      </div>
+
+      <!-- Layer 3: Foreground Text - "Graphic Designer" -->
+      <!-- z-index: 30 (in front of image) -->
+      <div class="absolute left-[80px] bottom-[60px] z-30 w-fit">
+        <p class="text-[170px] font-black text-dark-gray leading-[0.9] whitespace-nowrap tracking-tight">
+          Graphic Designer
+        </p>
+      </div>
+    </div>
+
+    <!-- Mobile Layout - Stack vertically, center align -->
+    <div class="md:hidden relative min-h-screen flex flex-col items-center justify-center px-6 pb-20">
+      <div class="flex flex-col items-center space-y-8">
+        
+        <!-- Mobile: "Hi, I am GOPI" -->
+        <h1 class="text-5xl font-extrabold text-soft-blue leading-tight text-center">
+          Hi, I am GOPI
+        </h1>
+
+        <!-- Mobile: Character Image -->
+        <div class="relative z-20">
+          <img
+            src="/assets/hero_image.png"
+            alt="Gopi Character"
+            class="h-[300px] w-auto object-contain"
+          />
+        </div>
+
+        <!-- Mobile: "Graphic Designer" -->
+        <p class="text-4xl font-black text-dark-gray leading-tight text-center">
+          Graphic Designer
+        </p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
+
