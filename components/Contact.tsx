@@ -2,7 +2,7 @@
 
 export default function Contact() {
   return (
-    <section className="relative pt-0 pb-20 sm:pb-24 md:pb-28 lg:pb-32 overflow-hidden bg-white -mt-8">
+    <section id="contact-form" className="relative pt-0 pb-20 sm:pb-24 md:pb-28 lg:pb-32 overflow-hidden bg-white -mt-8">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         {/* Two Column Layout: Left - Contact Info & Services, Right - Form */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">

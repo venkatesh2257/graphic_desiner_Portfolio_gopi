@@ -55,9 +55,9 @@ export default function Portfolio() {
   }
 
   return (
-    <section className="relative py-20 sm:py-24 md:py-28 lg:py-32 overflow-hidden bg-white">
+    <section id="portfolio" className="relative py-20 sm:py-24 md:py-28 lg:py-32 overflow-hidden bg-white">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-        <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 bg-clip-text text-transparent leading-tight mb-12 lg:mb-16">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 bg-clip-text text-transparent leading-tight mb-12 lg:mb-16">
           Portfolio
         </h2>
         
@@ -123,6 +123,13 @@ export default function Portfolio() {
         {/* Call to Action Button */}
         <div className="flex justify-center mt-12 lg:mt-16">
           <button 
+            onClick={(e) => {
+              e.preventDefault()
+              const targetElement = document.querySelector('#contact')
+              if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }
+            }}
             className="w-[296px] h-[63px] rounded-[14px] text-[#5776E5] font-bold text-[20px] leading-[30px] hover:bg-[#5776E5] hover:text-white transition-all duration-300 ease-in-out flex items-center justify-center gap-3"
             style={{
               background: 'rgba(255, 255, 255, 0.07)',
@@ -162,7 +169,7 @@ export default function Portfolio() {
         </div>
         
         {/* Let's Create Together Section */}
-        <div className="mt-16 lg:mt-20 text-center">
+        <div id="contact" className="mt-16 lg:mt-20 text-center">
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#5776E5] leading-tight mb-6 lg:mb-8 whitespace-nowrap">
             Let's Create Together
           </h2>

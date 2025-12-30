@@ -1,14 +1,28 @@
 export default function Footer() {
   return (
-    <section className="relative w-full bg-[#5776E5]">
+    <section id="footer" className="relative w-full bg-[#5776E5]">
       <div className="max-w-[1280px] mx-auto h-[766px] px-4 sm:px-8 lg:px-12 py-12 sm:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Left Column - Brand Info */}
           <div className="space-y-6">
-            {/* Name */}
-            <h2 className="text-[40px] font-bold text-white leading-[48px]">
-              GOPI YALLATURI
-            </h2>
+            {/* Name with Image */}
+            <div className="flex items-center gap-4">
+              <div className="w-[80px] h-[80px] flex-shrink-0 relative">
+                <img
+                  src="/assets/hero_image.png"
+                  alt="Gopi Yallaturi"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ 
+                    objectPosition: '50% 25%',
+                    transform: 'scale(2.2)',
+                    transformOrigin: 'center center'
+                  }}
+                />
+              </div>
+              <h2 className="text-[40px] font-bold text-white leading-[48px]">
+                GOPI YALLATURI
+              </h2>
+            </div>
             
             {/* Description */}
             <p className="text-[24px] font-semibold text-white leading-[177%] max-w-[542px]">

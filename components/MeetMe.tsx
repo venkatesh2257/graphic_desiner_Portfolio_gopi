@@ -1,10 +1,10 @@
 export default function MeetMe() {
   return (
-    <section className="relative bg-white py-12 sm:py-16 md:py-20 overflow-hidden">
+    <section id="about" className="relative bg-white py-12 sm:py-16 md:py-20 overflow-hidden">
       {/* Mobile Layout - Stack vertically */}
       <div className="md:hidden px-4 sm:px-6 py-8 sm:py-12">
         <div className="flex flex-col items-center space-y-6 sm:space-y-8">
-          <h2 className="text-4xl sm:text-5xl font-bold text-blue-600 leading-tight text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-blue-600 leading-tight text-center">
             Meet Me
           </h2>
           <img
@@ -28,7 +28,7 @@ export default function MeetMe() {
       {/* Tablet Layout - Stack vertically */}
       <div className="hidden md:block lg:hidden max-w-[1400px] mx-auto px-8 py-12">
         <div className="flex flex-col items-center space-y-8">
-          <h2 className="text-6xl font-bold text-blue-600 leading-tight text-center">
+          <h2 className="text-5xl font-bold text-blue-600 leading-tight text-center">
             Meet Me
           </h2>
           <img
@@ -54,7 +54,7 @@ export default function MeetMe() {
         <div className="grid grid-cols-2 gap-6 xl:gap-8 items-start">
           {/* Left Column - Text Content */}
           <div className="flex flex-col space-y-6 pt-8 pl-20">
-            <h2 className="text-7xl lg:text-8xl xl:text-8xl font-bold text-blue-600 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-600 leading-tight">
               Meet Me
             </h2>
             <p className="text-3xl lg:text-4xl xl:text-4xl font-bold text-gray-500 leading-loose">

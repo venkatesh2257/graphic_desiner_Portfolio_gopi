@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <section className="relative bg-white pt-16 sm:pt-20 overflow-hidden">
+    <section id="home" className="relative bg-white pt-16 sm:pt-20 overflow-hidden">
       {/* Mobile Layout - Stack vertically, center align */}
       <div className="md:hidden relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 pb-12 sm:pb-20">
         <div className="flex flex-col items-center space-y-6 sm:space-y-8">
