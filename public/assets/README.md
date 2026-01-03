@@ -9,3 +9,5 @@ The image should be:
 
 The character image will be displayed on top of the "GOPI" text in the hero section.
 
+
+

@@ -5,16 +5,47 @@ import { useState } from 'react'
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null)
+  const [budgetError, setBudgetError] = useState<string>('')
+
+  // Validate budget format
+  const validateBudget = (value: string): boolean => {
+    if (!value || value.trim() === '') return true // Empty is valid (optional field)
+    
+    // Currency pattern: allows currency symbols, numbers, commas, dashes, spaces, and k/m/b suffixes
+    // Examples: $5,000, ₹50k, $5k-$10k, 5000-10000, €5,000 - €10,000
+    const currencyPattern = /^[\$€£¥₹]?\s*[\d,]+[kKmMbB]?(\s*[-–—]\s*[\$€£¥₹]?\s*[\d,]+[kKmMbB]?)?$|^[\d,]+(\s*[-–—]\s*[\d,]+)?[kKmMbB]?$/
+    
+    // Check if it contains only valid currency characters
+    const validChars = /^[\$€£¥₹\s,\d\-–—kKmMbB]+$/
+    
+    if (!validChars.test(value)) {
+      return false
+    }
+    
+    // Check if it matches currency pattern
+    return currencyPattern.test(value.trim())
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitStatus(null)
+    setBudgetError('')
 
     const form = e.currentTarget
     const formDataObj = new FormData(form)
     const firstName = formDataObj.get('firstName') as string
     const lastName = formDataObj.get('lastName') as string
+    const budget = formDataObj.get('budget') as string
+
+    // Validate budget if provided
+    if (budget && budget.trim() !== '') {
+      if (!validateBudget(budget)) {
+        setBudgetError('Please enter a valid budget format (e.g., $5,000, ₹50k, $5k-$10k)')
+        setIsSubmitting(false)
+        return
+      }
+    }
 
     // Create FormData with FormSubmit format
     const submitData = new FormData()
@@ -241,8 +272,43 @@ export default function Contact() {
                   type="text"
                   id="budget"
                   name="budget"
-                  className="w-full h-[50px] px-4 bg-white/85 rounded-[7px] shadow-[0px_0px_5.5px_rgba(0,0,0,0.25)] focus:ring-2 focus:ring-[#5776E5] focus:border-transparent outline-none transition-all border-0"
+                  placeholder="e.g., $5,000 - $10,000 or ₹50k - ₹1L or 5000-10000"
+                  className={`w-full h-[50px] px-4 bg-white/85 rounded-[7px] shadow-[0px_0px_5.5px_rgba(0,0,0,0.25)] focus:ring-2 focus:ring-[#5776E5] focus:border-transparent outline-none transition-all border-0 ${
+                    budgetError ? 'ring-2 ring-red-500' : ''
+                  }`}
+                  onInput={(e) => {
+                    // Allow currency symbols, numbers, commas, dashes, spaces, and k/m/b suffixes
+                    const input = e.currentTarget
+                    const value = input.value
+                    // Allow: currency symbols ($€£¥₹), numbers, commas, dashes, spaces, k/m/b/K/M/B
+                    const validPattern = /^[\$€£¥₹\s,\d\-–—kKmMbB]+$/
+                    if (value && !validPattern.test(value)) {
+                      // Remove invalid characters
+                      input.value = value.replace(/[^\$€£¥₹\s,\d\-–—kKmMbB]/g, '')
+                    }
+                    // Clear error on input
+                    if (budgetError) {
+                      setBudgetError('')
+                    }
+                  }}
+                  onBlur={(e) => {
+                    const value = e.currentTarget.value
+                    if (value && value.trim() !== '') {
+                      if (!validateBudget(value)) {
+                        setBudgetError('Please enter a valid budget format (e.g., $5,000, ₹50k, $5k-$10k)')
+                      } else {
+                        setBudgetError('')
+                      }
+                    } else {
+                      setBudgetError('')
+                    }
+                  }}
                 />
+                {budgetError ? (
+                  <p className="text-[14px] text-red-600 mt-1 font-medium">{budgetError}</p>
+                ) : (
+                  <p className="text-[12px] text-gray-500 mt-1">Accepts: $, €, £, ¥, ₹ and formats like 5k, 10k-20k, $5,000-$10,000</p>
+                )}
               </div>
 
               {/* Project Details */}
